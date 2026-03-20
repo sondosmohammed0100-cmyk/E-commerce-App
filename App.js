@@ -21,7 +21,12 @@ async function dbConnect(){
 dbConnect();
 
 //require routes
+const authRouter = require('./Router/auth.router');
 
+
+
+//use routes
+app.use('/api/auth', authRouter);
 
 
 //listen on server
