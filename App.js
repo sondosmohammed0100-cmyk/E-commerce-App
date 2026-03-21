@@ -22,11 +22,12 @@ dbConnect();
 
 //require routes
 const authRouter = require('./Router/auth.router');
-
+const categoryRouter = require('./Router/Category.router');
 
 
 //use routes
 app.use('/api/auth', authRouter);
+app.use('/api/categories', categoryRouter);
 
 
 //listen on server
