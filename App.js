@@ -2,7 +2,12 @@
 require('dotenv').config();
 //require express
 const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+//create express app
 const app = express();
+app.use(morgan('dev'));
+app.use(cors());
 //for parsing application/json  
 app.use(express.json());
 //connect to database
@@ -23,12 +28,16 @@ dbConnect();
 //require routes
 const authRouter = require('./Router/auth.router');
 const categoryRouter = require('./Router/Category.router');
+const productRouter=require('./Router/Product.router');
+const errorHandler = require('./Middelware/errorHandler');
 
 
 //use routes
+app.use('/images', express.static('Uploads'));
 app.use('/api/auth', authRouter);
 app.use('/api/categories', categoryRouter);
-
+app.use('/api/products',productRouter)
+app.use(errorHandler);
 
 //listen on server
 const port=process.env.PORT || 3000;
